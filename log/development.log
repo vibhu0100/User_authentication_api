@@ -1,0 +1,184 @@
+  [1m[35m (83.3ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (221.0ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (239.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20210303064413)
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20210303064413)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "password" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (1.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20210303064413"]]
+  [1m[36mTRANSACTION (196.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2021-03-03 06:54:37.919951"], ["updated_at", "2021-03-03 06:54:37.919951"]]
+  [1m[36mTRANSACTION (182.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/signup" for 127.0.0.1 at 2021-03-03 12:40:37 +0530
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"The Good Place", "fav_char"=>"Chidi"}
+[31mUnpermitted parameter: :fav_char[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[36mUser Create (1.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "The Good Place"], ["created_at", "2021-03-03 07:10:41.544484"], ["updated_at", "2021-03-03 07:10:41.544484"]]
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (232.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+Completed 200 OK in 619ms (Views: 0.3ms | ActiveRecord: 235.5ms | Allocations: 10485)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2021-03-03 12:41:00 +0530
+Processing by UsersController#authenticate as */*
+  Parameters: {"name"=>"The Good Place", "fav_char"=>"Chidi"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:17:in `authenticate'
+Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord: 0.3ms | Allocations: 1157)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2021-03-03 12:41:08 +0530
+Processing by UsersController#authenticate as */*
+  Parameters: {"name"=>"The Good Place", "fav_char"=>"Chidi"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:17:in `authenticate'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 618)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2021-03-03 12:41:16 +0530
+Processing by UsersController#authenticate as */*
+  Parameters: {"name"=>"The Good Place", "fav_char"=>"Chidi"}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" IS NULL LIMIT ?[0m  [["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:17:in `authenticate'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.8ms | Allocations: 618)
+
+
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT ?[0m  [["LIMIT", 1]]
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Destroy (15.0ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = ?[0m  [["id", 1]]
+  [1m[36mTRANSACTION (150.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/signup" for 127.0.0.1 at 2021-03-03 12:49:29 +0530
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Vibhuti Patel", "email"=>"vibhu@gmail.com", "password"=>"[FILTERED]"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[36mUser Create (7.7ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Vibhuti Patel"], ["email", "vibhu@gmail.com"], ["password", "vibhuti"], ["created_at", "2021-03-03 07:19:29.801213"], ["updated_at", "2021-03-03 07:19:29.801213"]]
+  ↳ app/controllers/users_controller.rb:8:in `create'
+  [1m[36mTRANSACTION (232.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:8:in `create'
+Completed 200 OK in 272ms (Views: 0.5ms | ActiveRecord: 240.5ms | Allocations: 9113)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2021-03-03 12:49:53 +0530
+Processing by UsersController#authenticate as */*
+  Parameters: {"email"=>"vibhu@gmail.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "vibhu@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:17:in `authenticate'
+Completed 200 OK in 39ms (Views: 0.1ms | ActiveRecord: 0.2ms | Allocations: 2182)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2021-03-03 12:49:59 +0530
+Processing by UsersController#authenticate as */*
+  Parameters: {"email"=>"vibhu@gmail.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "vibhu@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:17:in `authenticate'
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 496)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2021-03-03 12:50:07 +0530
+Processing by UsersController#authenticate as */*
+  Parameters: {"email"=>"vibhuti@gmail.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "vibhuti@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:17:in `authenticate'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 0.3ms | Allocations: 483)
+
+
+  [1m[35m (27.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" /* loading for inspect */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/signup" for 127.0.0.1 at 2021-03-03 15:25:38 +0530
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (10.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Siddhi", "email"=>"siddhi@gmail.com", "password"=>"[FILTERED]"}
+Completed 500 Internal Server Error in 33ms (ActiveRecord: 0.0ms | Allocations: 2060)
+
+
+  
+NameError (undefined local variable or method `decoded_token' for #<UsersController:0x00000000005ff0>
+Did you mean?  decode_token
+               encode_token):
+  
+app/controllers/application_controller.rb:13:in `logged_in_user'
+app/controllers/application_controller.rb:8:in `logged_in?'
+app/controllers/application_controller.rb:5:in `authorized'
+Started POST "/signup" for 127.0.0.1 at 2021-03-03 15:26:38 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Siddhi", "email"=>"siddhi@gmail.com", "password"=>"[FILTERED]"}
+Completed 500 Internal Server Error in 9ms (Allocations: 1973)
+
+
+  
+NameError (undefined local variable or method `decoded_token' for #<UsersController:0x00000000006ef0>
+Did you mean?  decodeds_token
+               encode_token):
+  
+app/controllers/application_controller.rb:13:in `logged_in_user'
+app/controllers/application_controller.rb:8:in `logged_in?'
+app/controllers/application_controller.rb:5:in `authorized'
+Started POST "/signup" for 127.0.0.1 at 2021-03-03 15:28:50 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Siddhi", "email"=>"siddhi@gmail.com", "password"=>"[FILTERED]"}
+Completed 500 Internal Server Error in 6ms (Allocations: 1973)
+
+
+  
+NameError (undefined local variable or method `decoded_token' for #<UsersController:0x00000000007dc8>
+Did you mean?  decodeds_token
+               encode_token):
+  
+app/controllers/application_controller.rb:13:in `logged_in_user'
+app/controllers/application_controller.rb:8:in `logged_in?'
+app/controllers/application_controller.rb:5:in `authorized'
+Started POST "/signup" for 127.0.0.1 at 2021-03-03 15:59:25 +0530
+Processing by UsersController#create as */*
+  Parameters: {"name"=>"Siddhi", "email"=>"siddhi@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/users_controller.rb:5:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mUser Create (81.8ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "password", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "Siddhi"], ["email", "siddhi@gmail.com"], ["password", "vibhutip"], ["created_at", "2021-03-03 10:29:26.238472"], ["updated_at", "2021-03-03 10:29:26.238472"]]
+  ↳ app/controllers/users_controller.rb:6:in `create'
+  [1m[36mTRANSACTION (133.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:6:in `create'
+Completed 200 OK in 663ms (Views: 1.4ms | ActiveRecord: 218.3ms | Allocations: 9205)
+
+
+Started POST "/authenticate" for 127.0.0.1 at 2021-03-03 16:00:01 +0530
+Processing by UsersController#authenticate as */*
+  Parameters: {"email"=>"siddhi@gmail.com", "password"=>"[FILTERED]"}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "siddhi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:16:in `authenticate'
+Completed 500 Internal Server Error in 187ms (ActiveRecord: 0.7ms | Allocations: 4315)
+
+
+  
+NoMethodError (undefined method `authenticate' for #<User id: 3, name: "Siddhi", email: "siddhi@gmail.com", password: [FILTERED], created_at: "2021-03-03 10:29:26.238472000 +0000", updated_at: "2021-03-03 10:29:26.238472000 +0000">):
+  
+app/controllers/users_controller.rb:18:in `authenticate'
+Started POST "/authenticate" for 127.0.0.1 at 2021-03-03 16:01:48 +0530
+Processing by UsersController#authenticate as */*
+  Parameters: {"email"=>"siddhi@gmail.com", "password"=>"[FILTERED]"}
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  ↳ app/controllers/users_controller.rb:16:in `authenticate'
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "siddhi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:16:in `authenticate'
+Completed 200 OK in 23ms (Views: 1.2ms | ActiveRecord: 2.6ms | Allocations: 4794)
+
+
