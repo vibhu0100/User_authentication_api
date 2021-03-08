@@ -10,9 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< Updated upstream
-ActiveRecord::Schema.define(version: 2021_03_03_064413) do
-=======
 ActiveRecord::Schema.define(version: 2021_03_08_065534) do
 
   create_table "posts", force: :cascade do |t|
@@ -22,7 +19,6 @@ ActiveRecord::Schema.define(version: 2021_03_08_065534) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
->>>>>>> Stashed changes
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -30,12 +26,10 @@ ActiveRecord::Schema.define(version: 2021_03_08_065534) do
     t.string "password"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-<<<<<<< Updated upstream
-=======
     t.string "status"
     t.integer "contact"
     t.string "otp_secret"
->>>>>>> Stashed changes
   end
 
+  add_foreign_key "posts", "users"
 end
