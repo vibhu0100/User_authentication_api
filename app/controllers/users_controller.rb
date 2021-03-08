@@ -43,8 +43,6 @@ class UsersController < ApplicationController
   end
   def verify
     @user = User.find_by(contact: params[:contact])
-    puts params[:otp].class
-    puts @user.otp_secret.class
     if @user.otp_secret.eql?(params[:otp])
       token = encode_token({ user_id: @user.id })
       render json: { user: @user, token: token }
