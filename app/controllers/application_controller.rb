@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
   before_action :authorized
+  before_action :get_current_user
   def authorized
     render json: {message: "Please log in"}, status: :unauthorized unless logged_in?
   end
@@ -28,5 +29,9 @@ class ApplicationController < ActionController::API
   end
   def auth_header
     request.headers['Authorization']
+  end
+  private
+  def get_current_user
+    @current_user = logged_in_user
   end
 end

@@ -1,18 +1,15 @@
 class UsersController < ApplicationController
   before_action :authorized, only: [:auto_login]
   def info
-    if decoded_token
-      user_id = decoded_token[0]['user_id']
-      user = User.find(user_id)
-      render json: user
+    if @current_user
+      render json: @current_user
     else
       render json: "Not identified"
     end
   end
   def edit
     if decoded_token
-      user_id = decoded_token[0]['user_id']
-      user = User.find(user_id)
+      user = @current_user
       user.update(user_params)
     else
       render json: "Cannot Identify"

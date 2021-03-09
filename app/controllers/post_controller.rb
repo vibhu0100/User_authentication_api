@@ -1,6 +1,6 @@
 class PostController < ApplicationController
   def create
-    @post = logged_in_user.posts.build(post_params)
+    @post = @current_user.posts.build(post_params)
     if @post.save
       render json: { message: 'Created', post: @post }
     else
@@ -9,7 +9,7 @@ class PostController < ApplicationController
   end
 
   def index
-    @posts = logged_in_user.posts.all
+    @posts = @current_user.posts.all
     if @posts.empty?
       render json: { message: "You don't have nay post" }
     else
@@ -18,7 +18,7 @@ class PostController < ApplicationController
   end
 
   def update
-    post = logged_in_user.posts.all
+    post = @current_user.posts.all
     @post = post.find(params[:id])
     if @post.update(post_params)
       render json: { message: 'Successfully Updated', post: @post }
@@ -28,7 +28,7 @@ class PostController < ApplicationController
   end
 
   def delete
-    post = logged_in_user.posts.all
+    post = @current_user.posts.all
     @post = post.find(params[:id])
     if @post.destroy
       render json: { message: 'Successfully deleted' }
@@ -39,7 +39,7 @@ class PostController < ApplicationController
 
   def image
     url = Hash.new
-    posts = logged_in_user.posts.all
+    posts = @current_user.posts.all
     @post = posts.find(params[:id])
     if @post.images.attached?
       @post.images.each do |img|
@@ -52,7 +52,7 @@ class PostController < ApplicationController
   end
 
   def add_image
-    posts = logged_in_user.posts.all
+    posts = @current_user.posts.all
     @post = posts.find(params[:id])
     if params[:images]
       @post.images.attach(params[:images])
@@ -63,7 +63,7 @@ class PostController < ApplicationController
   end
 
   def delete_image
-    posts = logged_in_user.posts.all
+    posts = @current_user.posts.all
     @post = posts.find(params[:id])
     if @post
       img = @post.images.find_by(blob_id: params[:blob_id])
