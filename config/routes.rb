@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   get 'post/:id/delete', to: 'post#delete'
   get 'post/:id/images', to: 'post#image'
   post 'post/:id/add_images', to: 'post#add_image'
-  get 'post/:id/delete_image/:blob_id', to: 'post#delete_image'
+  get 'post/:id/delete/:blob_id', to: 'post#delete_image'
+  post 'upload_csv', to: 'csv#read_csv'
 end 

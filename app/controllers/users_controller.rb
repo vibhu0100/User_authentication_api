@@ -26,7 +26,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       token = encode_token({ user_id: @user.id })
-      render json: { user: @user, token: token }
+      get_current_user
+      render json: user_token_hash(token, @user)
     else
       render json: { error: 'Enter Proper data' }
     end
@@ -99,9 +100,9 @@ class UsersController < ApplicationController
   def user_params
     params.permit(:name, :email, :password, :contact, :status, :otp)
   end
-  def user_token_hash(token)
+  def user_token_hash(token, user = @current_user)
     hash = Hash.new
-    hash[:user] = @current_user
+    hash[:user] = user
     hash[:token] = token
     return hash
   end
