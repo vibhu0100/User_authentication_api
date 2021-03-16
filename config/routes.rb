@@ -17,5 +17,10 @@ Rails.application.routes.draw do
   get 'post/:id/delete', to: 'post#delete'
   get 'post/:id/images', to: 'post#image'
   post 'post/:id/add_images', to: 'post#add_image'
-  get 'post/:id/delete_image/:blob_id', to: 'post#delete_image'
+  get 'post/:id/delete/:blob_id', to: 'post#delete_image'
+  post 'post/:post_id/comment', to: 'comments#create'
+  get 'post/:post_id/comments', to: 'comments#index'
+  get 'feed', to: 'post#feed'
+  get 'post/:post_id/comment/:comment_id/delete', to: 'comments#delete'
+  post 'post/:post_id/comment/:comment_id/edit', to: 'comments#update'
 end 

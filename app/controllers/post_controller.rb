@@ -77,6 +77,20 @@ class PostController < ApplicationController
     end
   end
 
+  def feed
+    posts = []
+    User.all.each do |user|
+      user.posts.order(created: :desc).each do |post|
+        posts.append(post)
+      end
+    end
+    if !posts.empty?
+      render json: posts, each_serializer: PostSerializer
+    else
+      render json: "No posts"
+    end
+  end
+
   private
   def post_params
     params.permit(:caption, images: [])
