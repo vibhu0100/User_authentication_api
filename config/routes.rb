@@ -18,4 +18,7 @@ Rails.application.routes.draw do
   get 'post/:id/images', to: 'post#image'
   post 'post/:id/add_images', to: 'post#add_image'
   get 'post/:id/delete_image/:blob_id', to: 'post#delete_image'
+  get 'post/:post_id/like', to: 'likes#like'
+  get 'user/likes', to: 'likes#liked_post'
+  get 'post/:post_id/unlike', to: 'likes#unlike'
 end 
