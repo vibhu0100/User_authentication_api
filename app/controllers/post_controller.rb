@@ -77,6 +77,20 @@ class PostController < ApplicationController
     end
   end
 
+  def feed
+    posts = @current_user.feed
+    if !posts.empty?
+      render json: json_format(posts)
+    else
+      render json: "No posts"
+    end
+  end
+
+  def show
+    @post = Post.find(params[:id])
+    render json: json_format(@post)
+  end
+
   private
   def post_params
     params.permit(:caption, images: [])

@@ -34,4 +34,29 @@ class ApplicationController < ActionController::API
   def get_current_user
     @current_user = logged_in_user
   end
+  def json_format(object, token = nil)
+    response = Hash.new
+    type = object.class.to_s
+    if type.to_s.include?("::")
+      type = type.split('::')
+      type = type[0]
+    end
+    serializer = (type + "Serializer").constantize
+    ser = ActiveModelSerializers::SerializableResource.new(object, each_serializer: serializer)
+    response["data"] = {type => ser}
+    unless token.nil?
+      response["token"] = token
+    end
+    return response
+  end
+  
+  def is_friend?(user_id)
+    a = "Accepted"
+    @friend = Friend.where("user_id = ? AND friend_id = ? AND request = ?", @current_user.id, user_id, a)
+    if @friend.empty?
+      return false
+    else
+      return true
+    end
+  end
 end

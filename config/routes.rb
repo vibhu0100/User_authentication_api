@@ -18,4 +18,8 @@ Rails.application.routes.draw do
   get 'post/:id/images', to: 'post#image'
   post 'post/:id/add_images', to: 'post#add_image'
   get 'post/:id/delete_image/:blob_id', to: 'post#delete_image'
+  get 'user/:friend_id/request', to: 'friends#send_request'
+  get 'user/:request_id/accept', to: 'friends#accept_request'
+  get 'user/friends', to: 'friends#index'
+  get 'user/requests', to: 'friends#friend_request'
 end 
