@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorized, only: [:auto_login]
+  before_action :check_flag
   def index
     @users = User.all
     paginate @users, per_page: 2
@@ -13,10 +14,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
+  def update
     if decoded_token
       user = @current_user
+      if params["public_acc"]
+        if params["public_acc"]!=user.public_acc.to_s
+          user.toggle! :public_acc
+        end
+      end
       user.update(user_params)
+
     else
       render json: 'Cannot Identify'
     end
@@ -97,12 +104,15 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:name, :email, :password, :contact, :status, :otp)
+    params.permit(:name, :email, :password, :contact, :status, :otp, :public_acc)
   end
   def user_token_hash(token)
     hash = Hash.new
     hash[:user] = @current_user
     hash[:token] = token
     return hash
+  end
+  def check_flag
+    $check = false
   end
 end
